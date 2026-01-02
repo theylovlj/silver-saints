@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SILVER SAINTS | Exclusive Drops</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Cursor Trail Effect -->
+    <div class="cursor-trail"></div>
+
+    <!-- Loading Screen -->
+    <div id="loader">
+        <div class="loader-content">
+            <div class="loader-cross">✝</div>
+            <div class="loader-text">SILVER SAINTS</div>
+            <div class="loader-bar"><span></span></div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <span class="logo-cross">✝</span>
+            <span class="logo-text">SILVER SAINTS</span>
+            <span class="logo-cross">✝</span>
+        </div>
+        <div class="nav-links">
+            <a href="#drop" class="nav-link">DROP</a>
+            <a href="#collection" class="nav-link">COLLECTION</a>
+            <a href="#lore" class="nav-link">LORE</a>
+            <a href="#sanctuary" class="nav-link">SANCTUARY</a>
+        </div>
+        <div class="nav-right">
+            <div class="queue-indicator" id="queueIndicator">
+                <span class="queue-dot"></span>
+                <span class="queue-text">QUEUE: #<span id="queuePositionNav">---</span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section with 3D Element -->
+    <section class="hero" id="hero">
+        <div class="hero-bg-elements">
+            <div class="cathedral-arch arch-left"></div>
+            <div class="cathedral-arch arch-right"></div>
+            <div class="floating-crosses">
+                <span class="float-cross fc1">✝</span>
+                <span class="float-cross fc2">✝</span>
+                <span class="float-cross fc3">✝</span>
+                <span class="float-cross fc4">✝</span>
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="title-line">SILVER</span>
+                <span class="title-line">SAINTS</span>
+            </h1>
+            <p class="hero-tagline">FORGED IN DEVOTION · WORN BY THE WORTHY</p>
+        </div>
+
+        <!-- 3D Canvas Container -->
+        <div class="three-container" id="threeContainer">
+            <canvas id="threeCanvas"></canvas>
+            <div class="interaction-hint">
+                <span>DRAG TO ROTATE</span>
+                <span class="hint-divider">·</span>
+                <span>SCROLL TO ZOOM</span>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-line"></div>
+            <span>SCROLL</span>
+        </div>
+    </section>
+
+    <!-- Drop Countdown Section -->
+    <section class="drop-section" id="drop">
+        <div class="section-header">
+            <div class="ornament ornament-left">◆──────</div>
+            <h2 class="section-title">NEXT DROP</h2>
+            <div class="ornament ornament-right">──────◆</div>
+        </div>
+
+        <div class="drop-container">
+            <div class="drop-info">
+                <h3 class="drop-name">SAINTS & SINNERS COLLECTION</h3>
+                <p class="drop-description">12 pieces. Limited to 50 units each. Once gone, forever gone.</p>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                <div class="countdown-item">
+                    <span class="countdown-value" id="days">00</span>
+                    <span class="countdown-label">DAYS</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="hours">00</span>
+                    <span class="countdown-label">HOURS</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="minutes">00</span>
+                    <span class="countdown-label">MINS</span>
+                </div>
+                <div class="countdown-separator">:</div>
+                <div class="countdown-item">
+                    <span class="countdown-value" id="seconds">00</span>
+                    <span class="countdown-label">SECS</span>
+                </div>
+            </div>
+
+            <!-- Queue System -->
+            <div class="queue-system" id="queueSystem">
+                <div class="queue-card">
+                    <div class="queue-header">
+                        <span class="queue-icon">✝</span>
+                        <span>JOIN THE CONGREGATION</span>
+                        <span class="queue-icon">✝</span>
+                    </div>
+
+                    <form class="queue-form" id="queueForm">
+                        <div class="input-group">
+                            <input type="email" id="emailInput" placeholder="YOUR EMAIL" required>
+                            <button type="submit" class="queue-btn">
+                                <span>ENTER</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <div class="queue-status" id="queueStatus" style="display: none;">
+                        <div class="status-header">YOU'RE IN</div>
+                        <div class="queue-position">
+                            <span class="position-label">QUEUE POSITION</span>
+                            <span class="position-number" id="queuePosition">#247</span>
+                        </div>
+                        <div class="queue-stats">
+                            <div class="stat">
+                                <span class="stat-value" id="totalInQueue">1,247</span>
+                                <span class="stat-label">IN QUEUE</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value" id="estimatedChance">HIGH</span>
+                                <span class="stat-label">YOUR ODDS</span>
+                            </div>
+                        </div>
+                        <div class="queue-message">
+                            Stay on this page to maintain your position. We'll notify you when it's your turn.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- While You Wait Section -->
+            <div class="while-waiting" id="whileWaiting" style="display: none;">
+                <div class="waiting-header">
+                    <span>WHILE YOU WAIT</span>
+                </div>
+                <div class="waiting-activities">
+                    <button class="activity-btn" id="exploreBtn">
+                        <span class="activity-icon">◈</span>
+                        <span>EXPLORE THE CROSS</span>
+                    </button>
+                    <button class="activity-btn" id="loreBtn">
+                        <span class="activity-icon">☩</span>
+                        <span>READ THE LORE</span>
+                    </button>
+                    <button class="activity-btn" id="peekBtn">
+                        <span class="activity-icon">◇</span>
+                        <span>PEEK THE DROP</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Preview -->
+    <section class="collection-section" id="collection">
+        <div class="section-header">
+            <div class="ornament ornament-left">◆──────</div>
+            <h2 class="section-title">COLLECTION</h2>
+            <div class="ornament ornament-right">──────◆</div>
+        </div>
+
+        <div class="collection-grid">
+            <div class="collection-item locked">
+                <div class="item-image">
+                    <div class="locked-overlay">
+                        <span class="lock-icon">🔒</span>
+                        <span class="lock-text">DROPS IN</span>
+                        <span class="lock-time" id="itemTimer1">48:00:00</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h4 class="item-name">SAINT'S CROSS TEE</h4>
+                    <span class="item-price">$XXX</span>
+                </div>
+            </div>
+            <div class="collection-item locked">
+                <div class="item-image">
+                    <div class="locked-overlay">
+                        <span class="lock-icon">🔒</span>
+                        <span class="lock-text">DROPS IN</span>
+                        <span class="lock-time" id="itemTimer2">48:00:00</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h4 class="item-name">DAGGER CHAIN HOODIE</h4>
+                    <span class="item-price">$XXX</span>
+                </div>
+            </div>
+            <div class="collection-item locked">
+                <div class="item-image">
+                    <div class="locked-overlay">
+                        <span class="lock-icon">🔒</span>
+                        <span class="lock-text">DROPS IN</span>
+                        <span class="lock-time" id="itemTimer3">48:00:00</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h4 class="item-name">FLEUR VARSITY</h4>
+                    <span class="item-price">$XXX</span>
+                </div>
+            </div>
+            <div class="collection-item locked">
+                <div class="item-image">
+                    <div class="locked-overlay">
+                        <span class="lock-icon">🔒</span>
+                        <span class="lock-text">DROPS IN</span>
+                        <span class="lock-time" id="itemTimer4">48:00:00</span>
+                    </div>
+                </div>
+                <div class="item-info">
+                    <h4 class="item-name">SINNER'S CARGO</h4>
+                    <span class="item-price">$XXX</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lore Section -->
+    <section class="lore-section" id="lore">
+        <div class="section-header">
+            <div class="ornament ornament-left">◆──────</div>
+            <h2 class="section-title">THE LORE</h2>
+            <div class="ornament ornament-right">──────◆</div>
+        </div>
+
+        <div class="lore-container">
+            <div class="lore-chapter active" data-chapter="1">
+                <div class="chapter-number">I</div>
+                <h3 class="chapter-title">GENESIS</h3>
+                <p class="chapter-text">
+                    Born in the shadows of cathedral spires, Silver Saints emerged from a vision—
+                    to create garments worthy of those who walk between worlds. We don't follow trends.
+                    We forge our own scripture in silver and thread.
+                </p>
+                <p class="chapter-text">
+                    Every piece is a relic. Every thread, a prayer. We create for the devoted,
+                    the seekers, the ones who understand that clothing is armor for the soul.
+                </p>
+            </div>
+            <div class="lore-chapter" data-chapter="2">
+                <div class="chapter-number">II</div>
+                <h3 class="chapter-title">THE CRAFT</h3>
+                <p class="chapter-text">
+                    Our process is ritual. Each design begins in meditation, sketched by candlelight,
+                    refined through fire. We source materials that carry weight—heavy cotton that drapes
+                    like vestments, silver hardware that catches light like halos.
+                </p>
+                <p class="chapter-text">
+                    Limited runs only. When a piece sells out, it ascends. We don't restock.
+                    We don't repeat. Each collection is a chapter, closed forever once complete.
+                </p>
+            </div>
+            <div class="lore-chapter" data-chapter="3">
+                <div class="chapter-number">III</div>
+                <h3 class="chapter-title">THE CONGREGATION</h3>
+                <p class="chapter-text">
+                    Those who wear Silver Saints recognize each other. A nod across the street.
+                    A knowing glance. You're not buying clothes—you're joining a fellowship
+                    of those who refuse ordinary.
+                </p>
+                <p class="chapter-text">
+                    The queue is our initiation. The wait is your devotion.
+                    The piece you claim is your relic. Wear it with reverence.
+                </p>
+            </div>
+            <div class="lore-nav">
+                <button class="lore-nav-btn active" data-target="1">I</button>
+                <button class="lore-nav-btn" data-target="2">II</button>
+                <button class="lore-nav-btn" data-target="3">III</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sanctuary (Contact) Section -->
+    <section class="sanctuary-section" id="sanctuary">
+        <div class="section-header">
+            <div class="ornament ornament-left">◆──────</div>
+            <h2 class="section-title">SANCTUARY</h2>
+            <div class="ornament ornament-right">──────◆</div>
+        </div>
+
+        <div class="sanctuary-container">
+            <div class="sanctuary-message">
+                <p>For inquiries, collaborations, or confessions.</p>
+            </div>
+            <div class="sanctuary-links">
+                <a href="mailto:contact@silversaints.com" class="sanctuary-link">
+                    <span class="link-icon">✉</span>
+                    <span>CONTACT@SILVERSAINTS.COM</span>
+                </a>
+                <a href="#" class="sanctuary-link">
+                    <span class="link-icon">◈</span>
+                    <span>INSTAGRAM</span>
+                </a>
+                <a href="#" class="sanctuary-link">
+                    <span class="link-icon">◈</span>
+                    <span>TWITTER</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-cross">✝</span>
+                <span>SILVER SAINTS</span>
+                <span class="logo-cross">✝</span>
+            </div>
+            <p class="footer-tagline">FORGED IN DEVOTION · WORN BY THE WORTHY</p>
+            <div class="footer-ornament">◆ ◆ ◆</div>
+            <p class="footer-copy">© 2025 SILVER SAINTS. ALL RIGHTS RESERVED.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/three-scene.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
