@@ -1,152 +1,135 @@
 // ========================================
 // SILVER SAINTS - Main JavaScript
-// Minimal / Kill-Tec Style
+// Password Entry & Core Functionality
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    Intro.init();
-    Countdown.init();
-    NotifyForm.init();
+    // Initialize based on page
+    if (document.getElementById('passwordInput')) {
+        PasswordGate.init();
+    }
+    if (document.getElementById('emailPopup')) {
+        EmailPopup.init();
+    }
     SmoothScroll.init();
 });
 
 // ========================================
-// INTRO SCREEN
+// PASSWORD GATE (index.html)
 // ========================================
-const Intro = {
-    init() {
-        const intro = document.getElementById('intro');
-        const site = document.getElementById('site');
+const PasswordGate = {
+    // Change this password as needed
+    PASSWORD: 'saints',
 
-        // Check if user has already entered
-        if (sessionStorage.getItem('silverSaintsEntered')) {
-            intro.classList.add('hidden');
-            site.classList.add('visible');
+    init() {
+        const input = document.getElementById('passwordInput');
+        const btn = document.getElementById('enterBtn');
+        const error = document.getElementById('passwordError');
+
+        if (!input || !btn) return;
+
+        // Check if already authenticated this session
+        if (sessionStorage.getItem('silverSaintsAuth')) {
+            window.location.href = 'collection.html';
             return;
         }
 
-        // Listen for Enter key
-        document.addEventListener('keydown', (e) => {
+        // Enter button click
+        btn.addEventListener('click', (e) => {
+            e.preventDefault();
+            this.validate();
+        });
+
+        // Enter key press
+        input.addEventListener('keydown', (e) => {
             if (e.key === 'Enter') {
-                this.enter();
+                e.preventDefault();
+                this.validate();
             }
         });
 
-        // Also allow click to enter
-        intro.addEventListener('click', () => {
-            this.enter();
+        // Clear error on input
+        input.addEventListener('input', () => {
+            error.textContent = '';
+            error.classList.remove('visible');
         });
     },
 
-    enter() {
-        const intro = document.getElementById('intro');
-        const site = document.getElementById('site');
+    validate() {
+        const input = document.getElementById('passwordInput');
+        const error = document.getElementById('passwordError');
+        const password = input.value.trim().toLowerCase();
 
-        intro.classList.add('hidden');
-        site.classList.add('visible');
-        sessionStorage.setItem('silverSaintsEntered', 'true');
+        if (password === this.PASSWORD) {
+            sessionStorage.setItem('silverSaintsAuth', 'true');
+            document.getElementById('intro').classList.add('fade-out');
+            setTimeout(() => {
+                window.location.href = 'collection.html';
+            }, 500);
+        } else {
+            error.textContent = 'INVALID PASSWORD';
+            error.classList.add('visible');
+            input.value = '';
+            input.focus();
+        }
     }
 };
 
 // ========================================
-// COUNTDOWN
+// EMAIL POPUP (collection.html)
 // ========================================
-const Countdown = {
-    targetDate: null,
-
+const EmailPopup = {
     init() {
-        // Set drop date to 2 days from now
-        this.targetDate = new Date();
-        this.targetDate.setDate(this.targetDate.getDate() + 2);
-        this.targetDate.setHours(0, 0, 0, 0);
+        const popup = document.getElementById('emailPopup');
+        const closeBtn = document.getElementById('popupClose');
+        const form = document.getElementById('popupForm');
+        const success = document.getElementById('popupSuccess');
 
-        this.update();
-        setInterval(() => this.update(), 1000);
-    },
+        if (!popup) return;
 
-    update() {
-        const now = new Date().getTime();
-        const distance = this.targetDate.getTime() - now;
-
-        if (distance <= 0) {
-            this.showLive();
-            return;
+        // Check if already subscribed
+        if (localStorage.getItem('silverSaintsSubscribed')) {
+            return; // Don't show popup
         }
 
-        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        // Show popup after 5 seconds
+        setTimeout(() => {
+            popup.classList.add('visible');
+        }, 5000);
 
-        document.getElementById('days').textContent = this.pad(days);
-        document.getElementById('hours').textContent = this.pad(hours);
-        document.getElementById('minutes').textContent = this.pad(minutes);
-        document.getElementById('seconds').textContent = this.pad(seconds);
-
-        // Update product timers
-        const timeStr = `${this.pad(hours + days * 24)}:${this.pad(minutes)}:${this.pad(seconds)}`;
-        document.querySelectorAll('.lock-time').forEach(el => {
-            el.textContent = timeStr;
+        // Close button
+        closeBtn.addEventListener('click', () => {
+            popup.classList.remove('visible');
         });
-    },
 
-    pad(num) {
-        return num.toString().padStart(2, '0');
-    },
-
-    showLive() {
-        const countdown = document.getElementById('countdown');
-        countdown.innerHTML = '<div class="live">DROP IS LIVE</div>';
-
-        // Unlock products
-        document.querySelectorAll('.product-card').forEach(card => {
-            card.classList.remove('locked');
+        // Click outside to close
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.classList.remove('visible');
+            }
         });
-    }
-};
 
-// ========================================
-// NOTIFY FORM
-// ========================================
-const NotifyForm = {
-    init() {
-        const input = document.getElementById('emailInput');
-        const btn = document.getElementById('notifyBtn');
-
-        if (!btn) return;
-
-        btn.addEventListener('click', (e) => {
+        // Form submit
+        form.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = input.value.trim();
+            const email = document.getElementById('popupEmail').value.trim();
 
-            if (this.validate(email)) {
-                this.submit(email);
-            } else {
-                input.style.borderColor = '#ff0000';
+            if (this.validateEmail(email)) {
+                localStorage.setItem('silverSaintsSubscribed', 'true');
+                localStorage.setItem('silverSaintsEmail', email);
+                form.style.display = 'none';
+                success.textContent = 'WELCOME TO THE CONGREGATION';
+                success.classList.add('visible');
+
                 setTimeout(() => {
-                    input.style.borderColor = '';
+                    popup.classList.remove('visible');
                 }, 2000);
             }
         });
     },
 
-    validate(email) {
+    validateEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    },
-
-    submit(email) {
-        const input = document.getElementById('emailInput');
-        const btn = document.getElementById('notifyBtn');
-
-        // Save email
-        localStorage.setItem('silverSaintsEmail', email);
-
-        // Update UI
-        input.value = '';
-        input.placeholder = 'YOU\'RE ON THE LIST';
-        input.disabled = true;
-        btn.textContent = 'CONFIRMED';
-        btn.disabled = true;
     }
 };
 
@@ -157,8 +140,11 @@ const SmoothScroll = {
     init() {
         document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
+                const href = link.getAttribute('href');
+                if (href === '#') return;
+
                 e.preventDefault();
-                const target = document.querySelector(link.getAttribute('href'));
+                const target = document.querySelector(href);
                 if (target) {
                     target.scrollIntoView({ behavior: 'smooth' });
                 }

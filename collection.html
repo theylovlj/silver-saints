@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COLLECTION | SILVER SAINTS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Email Popup -->
+    <div class="email-popup" id="emailPopup">
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose">+</button>
+            <div class="popup-header">
+                <span class="popup-logo">+</span>
+                <h3>JOIN THE CONGREGATION</h3>
+            </div>
+            <p class="popup-text">Sign up for exclusive discounts and updates.</p>
+            <form class="popup-form" id="popupForm">
+                <input type="email" id="popupEmail" placeholder="EMAIL ADDRESS" required>
+                <button type="submit">SUBSCRIBE</button>
+            </form>
+            <p class="popup-success" id="popupSuccess"></p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <a href="collection.html">SILVER SAINTS</a>
+        </div>
+        <div class="nav-links">
+            <a href="#lookbook">LOOKBOOK</a>
+            <a href="#shop">SHOP</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="cart-btn hidden" id="cartBtn">CART (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">+</div>
+            <h1 class="hero-title">SAINTS &<br>SINNERS</h1>
+            <p class="hero-subtitle">COLLECTION 001</p>
+        </div>
+    </section>
+
+    <!-- Lookbook Section -->
+    <section class="lookbook" id="lookbook">
+        <div class="section-header">
+            <h2>LOOKBOOK</h2>
+        </div>
+        <div class="lookbook-grid">
+            <div class="lookbook-item large">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 01</p>
+                </div>
+            </div>
+            <div class="lookbook-item">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 02</p>
+                </div>
+            </div>
+            <div class="lookbook-item">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 03</p>
+                </div>
+            </div>
+            <div class="lookbook-item wide">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 04</p>
+                </div>
+            </div>
+            <div class="lookbook-item">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 05</p>
+                </div>
+            </div>
+            <div class="lookbook-item">
+                <div class="lookbook-placeholder">
+                    <span>+</span>
+                    <p>IMAGE 06</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop" id="shop">
+        <div class="section-header">
+            <h2>SHOP</h2>
+            <span class="item-count">4 ITEMS</span>
+        </div>
+        <div class="product-grid">
+            <div class="product-card" data-id="1" data-name="SAINT'S CROSS TEE" data-price="85">
+                <div class="product-image">
+                    <div class="product-placeholder">
+                        <span>+</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SAINT'S CROSS TEE</span>
+                    <span class="product-price">$85</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <div class="product-card" data-id="2" data-name="DAGGER CHAIN HOODIE" data-price="145">
+                <div class="product-image">
+                    <div class="product-placeholder">
+                        <span>+</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">DAGGER CHAIN HOODIE</span>
+                    <span class="product-price">$145</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <div class="product-card" data-id="3" data-name="FLEUR VARSITY" data-price="220">
+                <div class="product-image">
+                    <div class="product-placeholder">
+                        <span>+</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">FLEUR VARSITY</span>
+                    <span class="product-price">$220</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <div class="product-card" data-id="4" data-name="SINNER'S CARGO" data-price="175">
+                <div class="product-image">
+                    <div class="product-placeholder">
+                        <span>+</span>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SINNER'S CARGO</span>
+                    <span class="product-price">$175</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button class="cart-close" id="cartClose">+</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">YOUR CART IS EMPTY</p>
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span>© 2025 SILVER SAINTS</span>
+            </div>
+            <div class="footer-center">
+                <div class="footer-socials">
+                    <a href="#" target="_blank">INSTAGRAM</a>
+                    <a href="#" target="_blank">TWITTER</a>
+                    <a href="#" target="_blank">TIKTOK</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

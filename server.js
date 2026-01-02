@@ -7,9 +7,13 @@ const PORT = process.env.PORT || 3000;
 // Serve static files
 app.use(express.static(__dirname));
 
-// Serve index.html for all routes (SPA support)
-app.get('*', (req, res) => {
+// Routes
+app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+app.get('/collection', (req, res) => {
+    res.sendFile(path.join(__dirname, 'collection.html'));
 });
 
 app.listen(PORT, () => {
