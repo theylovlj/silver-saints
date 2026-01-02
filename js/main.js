@@ -1,56 +1,61 @@
 // ========================================
 // SILVER SAINTS - Main JavaScript
+// Minimal / Kill-Tec Style
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Initialize all modules
-    Loader.init();
-    CursorTrail.init();
+    Intro.init();
     Countdown.init();
-    QueueSystem.init();
-    LoreNavigation.init();
-    ScrollAnimations.init();
-    Navigation.init();
+    NotifyForm.init();
+    SmoothScroll.init();
 });
 
 // ========================================
-// LOADER
+// INTRO SCREEN
 // ========================================
-const Loader = {
+const Intro = {
     init() {
-        const loader = document.getElementById('loader');
+        const intro = document.getElementById('intro');
+        const site = document.getElementById('site');
 
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                loader.classList.add('hidden');
-                document.body.style.overflow = 'auto';
-            }, 2500);
+        // Check if user has already entered
+        if (sessionStorage.getItem('silverSaintsEntered')) {
+            intro.classList.add('hidden');
+            site.classList.add('visible');
+            return;
+        }
+
+        // Listen for Enter key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+                this.enter();
+            }
         });
+
+        // Also allow click to enter
+        intro.addEventListener('click', () => {
+            this.enter();
+        });
+    },
+
+    enter() {
+        const intro = document.getElementById('intro');
+        const site = document.getElementById('site');
+
+        intro.classList.add('hidden');
+        site.classList.add('visible');
+        sessionStorage.setItem('silverSaintsEntered', 'true');
     }
 };
 
 // ========================================
-// CUSTOM CURSOR TRAIL
-// ========================================
-const CursorTrail = {
-    init() {
-        const cursor = document.querySelector('.cursor-trail');
-
-        document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX - 10 + 'px';
-            cursor.style.top = e.clientY - 10 + 'px';
-        });
-    }
-};
-
-// ========================================
-// COUNTDOWN TIMER
+// COUNTDOWN
 // ========================================
 const Countdown = {
     targetDate: null,
 
     init() {
-        // Set drop date to 2 days from now at midnight
+        // Set drop date to 2 days from now
         this.targetDate = new Date();
         this.targetDate.setDate(this.targetDate.getDate() + 2);
         this.targetDate.setHours(0, 0, 0, 0);
@@ -64,7 +69,6 @@ const Countdown = {
         const distance = this.targetDate.getTime() - now;
 
         if (distance <= 0) {
-            // Drop is live
             this.showLive();
             return;
         }
@@ -79,10 +83,10 @@ const Countdown = {
         document.getElementById('minutes').textContent = this.pad(minutes);
         document.getElementById('seconds').textContent = this.pad(seconds);
 
-        // Update item timers
-        const timeString = `${this.pad(hours + days * 24)}:${this.pad(minutes)}:${this.pad(seconds)}`;
+        // Update product timers
+        const timeStr = `${this.pad(hours + days * 24)}:${this.pad(minutes)}:${this.pad(seconds)}`;
         document.querySelectorAll('.lock-time').forEach(el => {
-            el.textContent = timeString;
+            el.textContent = timeStr;
         });
     },
 
@@ -92,188 +96,66 @@ const Countdown = {
 
     showLive() {
         const countdown = document.getElementById('countdown');
-        countdown.innerHTML = `
-            <div class="live-indicator">
-                <span class="live-dot"></span>
-                <span class="live-text">DROP IS LIVE</span>
-            </div>
-        `;
+        countdown.innerHTML = '<div class="live">DROP IS LIVE</div>';
+
         // Unlock products
-        document.querySelectorAll('.collection-item').forEach(item => {
-            item.classList.remove('locked');
+        document.querySelectorAll('.product-card').forEach(card => {
+            card.classList.remove('locked');
         });
     }
 };
 
 // ========================================
-// QUEUE SYSTEM
+// NOTIFY FORM
 // ========================================
-const QueueSystem = {
-    queuePosition: null,
-    totalInQueue: 1247,
-
+const NotifyForm = {
     init() {
-        const form = document.getElementById('queueForm');
-        const emailInput = document.getElementById('emailInput');
+        const input = document.getElementById('emailInput');
+        const btn = document.getElementById('notifyBtn');
 
-        // Check if user is already in queue
-        const savedPosition = localStorage.getItem('silverSaintsQueue');
-        if (savedPosition) {
-            this.queuePosition = parseInt(savedPosition);
-            this.showQueueStatus();
-        }
+        if (!btn) return;
 
-        form.addEventListener('submit', (e) => {
+        btn.addEventListener('click', (e) => {
             e.preventDefault();
-            const email = emailInput.value.trim();
+            const email = input.value.trim();
 
-            if (this.validateEmail(email)) {
-                this.joinQueue(email);
+            if (this.validate(email)) {
+                this.submit(email);
+            } else {
+                input.style.borderColor = '#ff0000';
+                setTimeout(() => {
+                    input.style.borderColor = '';
+                }, 2000);
             }
-        });
-
-        // Activity buttons
-        document.getElementById('exploreBtn')?.addEventListener('click', () => {
-            document.getElementById('hero').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        document.getElementById('loreBtn')?.addEventListener('click', () => {
-            document.getElementById('lore').scrollIntoView({ behavior: 'smooth' });
-        });
-
-        document.getElementById('peekBtn')?.addEventListener('click', () => {
-            document.getElementById('collection').scrollIntoView({ behavior: 'smooth' });
         });
     },
 
-    validateEmail(email) {
+    validate(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     },
 
-    joinQueue(email) {
-        // Simulate joining queue
-        this.queuePosition = Math.floor(Math.random() * 300) + 100;
-        this.totalInQueue += 1;
+    submit(email) {
+        const input = document.getElementById('emailInput');
+        const btn = document.getElementById('notifyBtn');
 
-        // Save to localStorage
-        localStorage.setItem('silverSaintsQueue', this.queuePosition.toString());
+        // Save email
         localStorage.setItem('silverSaintsEmail', email);
 
-        this.showQueueStatus();
-    },
-
-    showQueueStatus() {
-        const form = document.getElementById('queueForm');
-        const status = document.getElementById('queueStatus');
-        const whileWaiting = document.getElementById('whileWaiting');
-        const queueIndicator = document.getElementById('queueIndicator');
-
-        // Hide form, show status
-        form.style.display = 'none';
-        status.style.display = 'block';
-        whileWaiting.style.display = 'block';
-        queueIndicator.classList.add('visible');
-
-        // Update position displays
-        document.getElementById('queuePosition').textContent = `#${this.queuePosition}`;
-        document.getElementById('queuePositionNav').textContent = this.queuePosition;
-        document.getElementById('totalInQueue').textContent = this.totalInQueue.toLocaleString();
-
-        // Calculate odds
-        const odds = this.queuePosition <= 50 ? 'VERY HIGH' :
-                    this.queuePosition <= 150 ? 'HIGH' :
-                    this.queuePosition <= 300 ? 'MEDIUM' : 'LOW';
-        document.getElementById('estimatedChance').textContent = odds;
-
-        // Simulate queue movement
-        this.startQueueSimulation();
-    },
-
-    startQueueSimulation() {
-        setInterval(() => {
-            if (this.queuePosition > 1) {
-                // Randomly move up 1-3 positions
-                const movement = Math.floor(Math.random() * 3) + 1;
-                this.queuePosition = Math.max(1, this.queuePosition - movement);
-
-                document.getElementById('queuePosition').textContent = `#${this.queuePosition}`;
-                document.getElementById('queuePositionNav').textContent = this.queuePosition;
-
-                localStorage.setItem('silverSaintsQueue', this.queuePosition.toString());
-
-                // Flash effect on position change
-                const positionEl = document.querySelector('.position-number');
-                positionEl.style.animation = 'none';
-                positionEl.offsetHeight; // Trigger reflow
-                positionEl.style.animation = 'pulse 0.5s ease';
-            }
-        }, 5000 + Math.random() * 10000); // Every 5-15 seconds
+        // Update UI
+        input.value = '';
+        input.placeholder = 'YOU\'RE ON THE LIST';
+        input.disabled = true;
+        btn.textContent = 'CONFIRMED';
+        btn.disabled = true;
     }
 };
 
 // ========================================
-// LORE NAVIGATION
+// SMOOTH SCROLL
 // ========================================
-const LoreNavigation = {
+const SmoothScroll = {
     init() {
-        const navBtns = document.querySelectorAll('.lore-nav-btn');
-        const chapters = document.querySelectorAll('.lore-chapter');
-
-        navBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const target = btn.dataset.target;
-
-                // Update active states
-                navBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-
-                chapters.forEach(chapter => {
-                    chapter.classList.remove('active');
-                    if (chapter.dataset.chapter === target) {
-                        chapter.classList.add('active');
-                    }
-                });
-            });
-        });
-    }
-};
-
-// ========================================
-// SCROLL ANIMATIONS
-// ========================================
-const ScrollAnimations = {
-    init() {
-        // Add fade-in class to sections
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            section.classList.add('fade-in');
-        });
-
-        // Intersection Observer
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        });
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-    }
-};
-
-// ========================================
-// NAVIGATION
-// ========================================
-const Navigation = {
-    init() {
-        // Smooth scroll for nav links
-        document.querySelectorAll('.nav-link').forEach(link => {
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = document.querySelector(link.getAttribute('href'));
@@ -282,45 +164,5 @@ const Navigation = {
                 }
             });
         });
-
-        // Nav background on scroll
-        const nav = document.querySelector('.nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(10, 10, 10, 0.95)';
-            } else {
-                nav.style.background = 'linear-gradient(to bottom, var(--bg-primary), transparent)';
-            }
-        });
-    }
-};
-
-// ========================================
-// UTILITIES
-// ========================================
-const Utils = {
-    // Debounce function
-    debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = () => {
-                clearTimeout(timeout);
-                func(...args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
-    },
-
-    // Throttle function
-    throttle(func, limit) {
-        let inThrottle;
-        return function(...args) {
-            if (!inThrottle) {
-                func.apply(this, args);
-                inThrottle = true;
-                setTimeout(() => inThrottle = false, limit);
-            }
-        };
     }
 };
