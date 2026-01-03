@@ -9,18 +9,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
 const Cart = {
     items: [],
+    FREE_SHIPPING_THRESHOLD: 200,
 
     init() {
-        // Load cart from localStorage
         this.items = JSON.parse(localStorage.getItem('silverSaintsCart')) || [];
-
-        // Initialize UI
         this.bindEvents();
         this.updateUI();
+        this.updateShippingBanner();
     },
 
     bindEvents() {
-        // Size selection
         document.querySelectorAll('.size-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const card = e.target.closest('.product-card');
@@ -29,14 +27,12 @@ const Cart = {
             });
         });
 
-        // Add to cart buttons
         document.querySelectorAll('.add-to-cart').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 const card = e.target.closest('.product-card');
                 const selectedSize = card.querySelector('.size-btn.selected');
 
                 if (!selectedSize) {
-                    // Flash size buttons to indicate selection needed
                     card.querySelectorAll('.size-btn').forEach(b => {
                         b.classList.add('flash');
                         setTimeout(() => b.classList.remove('flash'), 500);
@@ -53,11 +49,8 @@ const Cart = {
                 };
 
                 this.addItem(item);
-
-                // Reset size selection
                 selectedSize.classList.remove('selected');
 
-                // Show confirmation
                 btn.textContent = 'ADDED';
                 btn.classList.add('added');
                 setTimeout(() => {
@@ -67,7 +60,6 @@ const Cart = {
             });
         });
 
-        // Cart button (open sidebar)
         const cartBtn = document.getElementById('cartBtn');
         if (cartBtn) {
             cartBtn.addEventListener('click', (e) => {
@@ -76,19 +68,16 @@ const Cart = {
             });
         }
 
-        // Close cart sidebar
         const cartClose = document.getElementById('cartClose');
         if (cartClose) {
             cartClose.addEventListener('click', () => this.closeSidebar());
         }
 
-        // Overlay click to close
         const overlay = document.getElementById('cartOverlay');
         if (overlay) {
             overlay.addEventListener('click', () => this.closeSidebar());
         }
 
-        // Checkout button
         const checkoutBtn = document.querySelector('.checkout-btn');
         if (checkoutBtn) {
             checkoutBtn.addEventListener('click', () => {
@@ -98,7 +87,6 @@ const Cart = {
     },
 
     addItem(newItem) {
-        // Check if item with same id and size exists
         const existingIndex = this.items.findIndex(
             item => item.id === newItem.id && item.size === newItem.size
         );
@@ -153,23 +141,14 @@ const Cart = {
         const count = this.getCount();
         const total = this.getTotal();
 
-        // Update cart count
         const countEl = document.getElementById('cartCount');
-        if (countEl) {
-            countEl.textContent = count;
-        }
+        if (countEl) countEl.textContent = count;
 
-        // Show/hide cart button
         const cartBtn = document.getElementById('cartBtn');
         if (cartBtn) {
-            if (count > 0) {
-                cartBtn.classList.remove('hidden');
-            } else {
-                cartBtn.classList.add('hidden');
-            }
+            cartBtn.classList.toggle('hidden', count === 0);
         }
 
-        // Update cart items display
         const cartItemsEl = document.getElementById('cartItems');
         if (cartItemsEl) {
             if (this.items.length === 0) {
@@ -177,9 +156,7 @@ const Cart = {
             } else {
                 cartItemsEl.innerHTML = this.items.map(item => `
                     <div class="cart-item" data-id="${item.id}" data-size="${item.size}">
-                        <div class="cart-item-image">
-                            <div class="cart-item-placeholder">+</div>
-                        </div>
+                        <div class="cart-item-image"><div class="cart-item-placeholder">+</div></div>
                         <div class="cart-item-details">
                             <span class="cart-item-name">${item.name}</span>
                             <span class="cart-item-size">SIZE: ${item.size}</span>
@@ -194,56 +171,57 @@ const Cart = {
                     </div>
                 `).join('');
 
-                // Bind quantity and remove buttons
                 cartItemsEl.querySelectorAll('.cart-item').forEach(el => {
                     const id = el.dataset.id;
                     const size = el.dataset.size;
-
-                    el.querySelector('.minus').addEventListener('click', () => {
-                        this.updateQuantity(id, size, -1);
-                    });
-
-                    el.querySelector('.plus').addEventListener('click', () => {
-                        this.updateQuantity(id, size, 1);
-                    });
-
-                    el.querySelector('.cart-item-remove').addEventListener('click', () => {
-                        this.removeItem(id, size);
-                    });
+                    el.querySelector('.minus').addEventListener('click', () => this.updateQuantity(id, size, -1));
+                    el.querySelector('.plus').addEventListener('click', () => this.updateQuantity(id, size, 1));
+                    el.querySelector('.cart-item-remove').addEventListener('click', () => this.removeItem(id, size));
                 });
             }
         }
 
-        // Update total
         const totalEl = document.getElementById('cartTotal');
-        if (totalEl) {
-            totalEl.textContent = `$${total}`;
-        }
+        if (totalEl) totalEl.textContent = `$${total}`;
 
-        // Show/hide footer
         const footer = document.getElementById('cartFooter');
-        if (footer) {
-            if (this.items.length > 0) {
-                footer.classList.add('visible');
-            } else {
-                footer.classList.remove('visible');
-            }
+        if (footer) footer.classList.toggle('visible', this.items.length > 0);
+
+        this.updateShippingBanner();
+    },
+
+    updateShippingBanner() {
+        const total = this.getTotal();
+        const shippingText = document.getElementById('shippingText');
+        const shippingProgress = document.getElementById('shippingProgress');
+
+        if (!shippingText || !shippingProgress) return;
+
+        const remaining = this.FREE_SHIPPING_THRESHOLD - total;
+        const progress = Math.min(100, (total / this.FREE_SHIPPING_THRESHOLD) * 100);
+
+        if (remaining <= 0) {
+            shippingText.textContent = 'YOU QUALIFY FOR FREE SHIPPING!';
+            shippingText.classList.add('free-shipping');
+            shippingProgress.style.width = '100%';
+            shippingProgress.classList.add('complete');
+        } else {
+            shippingText.textContent = `$${remaining} AWAY FROM FREE SHIPPING`;
+            shippingText.classList.remove('free-shipping');
+            shippingProgress.style.width = `${progress}%`;
+            shippingProgress.classList.remove('complete');
         }
     },
 
     openSidebar() {
-        const sidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        if (sidebar) sidebar.classList.add('open');
-        if (overlay) overlay.classList.add('visible');
+        document.getElementById('cartSidebar')?.classList.add('open');
+        document.getElementById('cartOverlay')?.classList.add('visible');
         document.body.style.overflow = 'hidden';
     },
 
     closeSidebar() {
-        const sidebar = document.getElementById('cartSidebar');
-        const overlay = document.getElementById('cartOverlay');
-        if (sidebar) sidebar.classList.remove('open');
-        if (overlay) overlay.classList.remove('visible');
+        document.getElementById('cartSidebar')?.classList.remove('open');
+        document.getElementById('cartOverlay')?.classList.remove('visible');
         document.body.style.overflow = '';
     }
 };
