@@ -15,6 +15,9 @@
     --gray-light: #f5f5f5;
     --gray-border: #e0e0e0;
     --font: 'Space Mono', monospace;
+    --font-body: 'Anonymous Pro', monospace;
+    --red: #cc0000;
+    --green: #22c55e;
 }
 
 html {
@@ -22,12 +25,95 @@ html {
 }
 
 body {
-    font-family: var(--font);
+    font-family: var(--font-body);
     background: var(--white);
     color: var(--black);
     font-size: 12px;
     line-height: 1.6;
     letter-spacing: 0.05em;
+}
+
+/* ========================================
+   LOADER / LOADING SCREEN
+   ======================================== */
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--white);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loader.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader-content {
+    text-align: center;
+}
+
+.loader-logo {
+    font-family: var(--font);
+    font-size: 60px;
+    display: block;
+    animation: pulse 1.5s ease-in-out infinite;
+}
+
+.loader-text {
+    font-family: var(--font);
+    font-size: 14px;
+    letter-spacing: 0.3em;
+    margin-top: 20px;
+    font-weight: 700;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.95); }
+}
+
+/* ========================================
+   MARQUEE BANNER
+   ======================================== */
+.marquee {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: var(--black);
+    color: var(--white);
+    overflow: hidden;
+    z-index: 999;
+    padding: 10px 0;
+}
+
+.marquee-content {
+    display: flex;
+    gap: 30px;
+    animation: marquee 30s linear infinite;
+    white-space: nowrap;
+}
+
+.marquee-content span {
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+}
+
+.marquee-divider {
+    opacity: 0.5;
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
 }
 
 body.no-scroll {
@@ -288,6 +374,7 @@ a {
 }
 
 .nav-logo a {
+    font-family: var(--font);
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.15em;
@@ -296,16 +383,59 @@ a {
 .nav-links {
     display: flex;
     gap: 40px;
+    align-items: center;
 }
 
-.nav-links a {
+.nav-links > a,
+.nav-dropdown-trigger {
+    font-family: var(--font);
     font-size: 11px;
     letter-spacing: 0.1em;
     transition: opacity 0.2s;
 }
 
-.nav-links a:hover,
-.nav-links a.active {
+.nav-links > a:hover,
+.nav-links > a.active,
+.nav-dropdown-trigger:hover {
+    opacity: 0.5;
+}
+
+/* Navigation Dropdown */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--white);
+    border: 1px solid var(--gray-border);
+    padding: 15px 25px;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.2s ease;
+    margin-top: 15px;
+}
+
+.nav-dropdown:hover .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    margin-top: 10px;
+}
+
+.nav-dropdown-menu a {
+    display: block;
+    font-family: var(--font);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 8px 0;
+    transition: opacity 0.2s;
+}
+
+.nav-dropdown-menu a:hover {
     opacity: 0.5;
 }
 
@@ -315,6 +445,7 @@ a {
 }
 
 .cart-btn {
+    font-family: var(--font);
     font-size: 11px;
     letter-spacing: 0.1em;
     transition: opacity 0.2s;
@@ -336,7 +467,7 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 60px;
+    margin-top: 100px; /* 60px nav + 40px marquee */
     border-bottom: 1px solid var(--gray-border);
 }
 
@@ -345,11 +476,13 @@ a {
 }
 
 .hero-logo {
+    font-family: var(--font);
     font-size: 60px;
     margin-bottom: 30px;
 }
 
 .hero-title {
+    font-family: var(--font);
     font-size: 48px;
     font-weight: 700;
     letter-spacing: 0.2em;
@@ -358,6 +491,7 @@ a {
 }
 
 .hero-subtitle {
+    font-family: var(--font);
     font-size: 12px;
     color: var(--gray);
     letter-spacing: 0.2em;
@@ -368,6 +502,7 @@ a {
     margin-top: 40px;
     padding: 15px 40px;
     border: 1px solid var(--black);
+    font-family: var(--font);
     font-size: 11px;
     letter-spacing: 0.15em;
     transition: all 0.2s;
@@ -418,6 +553,7 @@ a {
     aspect-ratio: 3/4;
     background: var(--gray-light);
     overflow: hidden;
+    position: relative;
 }
 
 .lookbook-item.large {
@@ -427,6 +563,19 @@ a {
 
 .lookbook-item.wide {
     grid-column: span 2;
+}
+
+.lookbook-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease, filter 0.3s ease;
+    filter: grayscale(20%);
+}
+
+.lookbook-item:hover .lookbook-img {
+    transform: scale(1.05);
+    filter: grayscale(0%);
 }
 
 .lookbook-placeholder {
@@ -465,15 +614,61 @@ a {
 .product-card {
     border: 1px solid var(--gray-border);
     transition: border-color 0.2s;
+    position: relative;
 }
 
 .product-card:hover {
     border-color: var(--black);
 }
 
+/* Product Badges */
+.product-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    padding: 6px 10px;
+    font-family: var(--font);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    z-index: 10;
+}
+
+.product-badge.new {
+    background: var(--black);
+    color: var(--white);
+}
+
+.product-badge.limited {
+    background: var(--red);
+    color: var(--white);
+}
+
+.product-badge.selling-fast {
+    background: var(--black);
+    color: var(--white);
+    animation: badge-pulse 2s ease-in-out infinite;
+}
+
+@keyframes badge-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
 .product-image {
     aspect-ratio: 3/4;
     background: var(--gray-light);
+    overflow: hidden;
+}
+
+.product-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.product-card:hover .product-img {
+    transform: scale(1.05);
 }
 
 .product-placeholder {
@@ -486,6 +681,40 @@ a {
     font-size: 40px;
 }
 
+/* Product Meta (viewing count, stock count) */
+.product-meta {
+    padding: 8px 15px;
+    border-top: 1px solid var(--gray-border);
+    background: var(--gray-light);
+}
+
+.viewing-count {
+    font-size: 10px;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.viewing-count .dot {
+    width: 6px;
+    height: 6px;
+    background: var(--green);
+    border-radius: 50%;
+    animation: dot-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes dot-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+}
+
+.stock-count {
+    font-size: 10px;
+    color: var(--red);
+    font-weight: 700;
+}
+
 .product-info {
     padding: 15px;
     display: flex;
@@ -494,11 +723,13 @@ a {
 }
 
 .product-name {
+    font-family: var(--font);
     font-size: 11px;
     letter-spacing: 0.05em;
 }
 
 .product-price {
+    font-family: var(--font);
     font-size: 11px;
 }
 
@@ -556,7 +787,7 @@ a {
 }
 
 .add-to-cart.added {
-    background: #22c55e;
+    background: var(--green);
 }
 
 /* ========================================
@@ -589,8 +820,49 @@ a {
 }
 
 .cart-header h3 {
+    font-family: var(--font);
     font-size: 12px;
     letter-spacing: 0.15em;
+}
+
+/* Cart Shipping Banner */
+.cart-shipping-banner {
+    padding: 15px 30px;
+    background: var(--gray-light);
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.shipping-text {
+    font-family: var(--font);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.shipping-text.free-shipping {
+    color: var(--green);
+    font-weight: 700;
+}
+
+.shipping-progress {
+    height: 4px;
+    background: var(--gray-border);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.shipping-progress-bar {
+    height: 100%;
+    background: var(--black);
+    border-radius: 2px;
+    transition: width 0.3s ease;
+    width: 0%;
+}
+
+.shipping-progress-bar.complete {
+    background: var(--green);
 }
 
 .cart-close {
@@ -752,6 +1024,7 @@ a {
 .cart-overlay.visible {
     display: block;
 }
+
 
 /* ========================================
    FOOTER
