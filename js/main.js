@@ -79,7 +79,7 @@ const PasswordGate = {
 
         // Check if already authenticated this session
         if (sessionStorage.getItem('silverSaintsAuth')) {
-            window.location.href = 'collection.html';
+            window.location.href = 'shop.html';
             return;
         }
 
@@ -113,7 +113,7 @@ const PasswordGate = {
             sessionStorage.setItem('silverSaintsAuth', 'true');
             document.getElementById('intro').classList.add('fade-out');
             setTimeout(() => {
-                window.location.href = 'collection.html';
+                window.location.href = 'shop.html';
             }, 500);
         } else {
             error.textContent = 'INVALID PASSWORD';
@@ -138,7 +138,7 @@ const EmailPopup = {
 
         // Check if already subscribed
         if (localStorage.getItem('silverSaintsSubscribed')) {
-            return;
+            return; // Don't show popup
         }
 
         // Show popup after 5 seconds

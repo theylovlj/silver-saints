@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SHOP | SILVER SAINTS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anonymous+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <span class="loader-logo">+</span>
+            <div class="loader-text">SILVER SAINTS</div>
+        </div>
+    </div>
+
+    <!-- Email Popup -->
+    <div class="email-popup" id="emailPopup">
+        <div class="popup-content">
+            <button class="popup-close" id="popupClose">+</button>
+            <div class="popup-header">
+                <span class="popup-logo">+</span>
+                <h3>JOIN THE CONGREGATION</h3>
+            </div>
+            <p class="popup-text">Sign up for exclusive discounts and updates.</p>
+            <form class="popup-form" id="popupForm">
+                <input type="email" id="popupEmail" placeholder="EMAIL ADDRESS" required>
+                <button type="submit">SUBSCRIBE</button>
+            </form>
+            <p class="popup-success" id="popupSuccess"></p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <a href="shop.html">SILVER SAINTS</a>
+        </div>
+        <div class="nav-links">
+            <a href="shop.html" class="active">SHOP</a>
+            <a href="lookbook.html">LOOKBOOK</a>
+            <a href="about.html">INFO</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="cart-btn hidden" id="cartBtn">CART (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Marquee Banner -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+        </div>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-logo">+</div>
+            <h1 class="hero-title">SAINTS &<br>SINNERS</h1>
+            <p class="hero-subtitle">COLLECTION 001</p>
+            <a href="#shop" class="hero-cta">SHOP NOW</a>
+        </div>
+    </section>
+
+    <!-- Shop Section -->
+    <section class="shop" id="shop">
+        <div class="section-header">
+            <h2>SHOP</h2>
+            <span class="item-count">8 ITEMS</span>
+        </div>
+        <div class="product-grid">
+            <!-- Product 1 -->
+            <div class="product-card" data-id="1" data-name="SAINT'S CROSS TEE" data-price="85">
+                <div class="product-badge selling-fast">SELLING FAST</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400&h=500&fit=crop&q=80" alt="Saint's Cross Tee" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">12</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SAINT'S CROSS TEE</span>
+                    <span class="product-price">$85</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" data-id="2" data-name="DAGGER CHAIN HOODIE" data-price="145">
+                <div class="product-badge limited">LIMITED STOCK</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=400&h=500&fit=crop&q=80" alt="Dagger Chain Hoodie" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="stock-count">Only 3 left</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">DAGGER CHAIN HOODIE</span>
+                    <span class="product-price">$145</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" data-id="3" data-name="FLEUR VARSITY" data-price="220">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400&h=500&fit=crop&q=80" alt="Fleur Varsity" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">8</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">FLEUR VARSITY</span>
+                    <span class="product-price">$220</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" data-id="4" data-name="SINNER'S CARGO" data-price="175">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1624378439575-d8705ad7ae80?w=400&h=500&fit=crop&q=80" alt="Sinner's Cargo" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">5</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SINNER'S CARGO</span>
+                    <span class="product-price">$175</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" data-id="5" data-name="GOTHIC CROSS CHAIN" data-price="95">
+                <div class="product-badge new">NEW</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400&h=500&fit=crop&q=80" alt="Gothic Cross Chain" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">18</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">GOTHIC CROSS CHAIN</span>
+                    <span class="product-price">$95</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="18IN">18"</button>
+                    <button class="size-btn" data-size="20IN">20"</button>
+                    <button class="size-btn" data-size="22IN">22"</button>
+                    <button class="size-btn" data-size="24IN">24"</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" data-id="6" data-name="ETERNAL RING SET" data-price="125">
+                <div class="product-badge selling-fast">SELLING FAST</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=400&h=500&fit=crop&q=80" alt="Eternal Ring Set" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="stock-count">Only 5 left</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">ETERNAL RING SET</span>
+                    <span class="product-price">$125</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="6">6</button>
+                    <button class="size-btn" data-size="7">7</button>
+                    <button class="size-btn" data-size="8">8</button>
+                    <button class="size-btn" data-size="9">9</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" data-id="7" data-name="CEMETERY LONG SLEEVE" data-price="110">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=400&h=500&fit=crop&q=80" alt="Cemetery Long Sleeve" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">7</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">CEMETERY LONG SLEEVE</span>
+                    <span class="product-price">$110</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="S">S</button>
+                    <button class="size-btn" data-size="M">M</button>
+                    <button class="size-btn" data-size="L">L</button>
+                    <button class="size-btn" data-size="XL">XL</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" data-id="8" data-name="SAINTS BEANIE" data-price="65">
+                <div class="product-badge new">NEW</div>
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1576871337622-98d48d1cf531?w=400&h=500&fit=crop&q=80" alt="Saints Beanie" class="product-img">
+                </div>
+                <div class="product-meta">
+                    <span class="viewing-count"><span class="dot"></span> <span class="view-num">14</span> viewing</span>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">SAINTS BEANIE</span>
+                    <span class="product-price">$65</span>
+                </div>
+                <div class="product-sizes">
+                    <button class="size-btn" data-size="OS">ONE SIZE</button>
+                </div>
+                <button class="add-to-cart">ADD TO CART</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button class="cart-close" id="cartClose">+</button>
+        </div>
+        <div class="cart-shipping-banner" id="shippingBanner">
+            <span class="shipping-text" id="shippingText">FREE SHIPPING ON ORDERS OVER $200</span>
+            <div class="shipping-progress">
+                <div class="shipping-progress-bar" id="shippingProgress"></div>
+            </div>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">YOUR CART IS EMPTY</p>
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span>© 2025 SILVER SAINTS</span>
+            </div>
+            <div class="footer-center">
+                <div class="footer-socials">
+                    <a href="#" target="_blank">INSTAGRAM</a>
+                    <a href="#" target="_blank">TWITTER</a>
+                    <a href="#" target="_blank">TIKTOK</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

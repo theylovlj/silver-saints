@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFO | SILVER SAINTS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anonymous+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <span class="loader-logo">+</span>
+            <div class="loader-text">SILVER SAINTS</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <a href="shop.html">SILVER SAINTS</a>
+        </div>
+        <div class="nav-links">
+            <a href="shop.html">SHOP</a>
+            <a href="lookbook.html">LOOKBOOK</a>
+            <a href="about.html" class="active">INFO</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="cart-btn hidden" id="cartBtn">CART (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Marquee Banner -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+        </div>
+    </div>
+
+    <!-- About Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">INFO</h1>
+            <p class="page-hero-subtitle">THE CONGREGATION</p>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-section">
+        <div class="about-grid">
+            <div class="about-block">
+                <h2 class="about-heading">THE BRAND</h2>
+                <p class="about-text">
+                    Silver Saints was born from the shadows of underground culture.
+                    We blend gothic aesthetics with contemporary streetwear, creating
+                    pieces for those who walk between worlds. Every design is a testament
+                    to the duality of existence - the sacred and the profane, the light
+                    and the dark.
+                </p>
+                <p class="about-text">
+                    Our collections are limited, our community is exclusive, and our
+                    vision is eternal. We don't follow trends - we create movements.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <h2 class="about-heading">THE PHILOSOPHY</h2>
+                <p class="about-text">
+                    We believe in quality over quantity. Each piece is crafted with
+                    intention, designed to stand the test of time. Our materials are
+                    premium, our cuts are precise, and our graphics tell stories that
+                    resonate with the soul.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <h2 class="about-heading">SHIPPING & RETURNS</h2>
+                <p class="about-text">
+                    FREE SHIPPING on orders over $200.<br>
+                    Standard shipping: 5-7 business days.<br>
+                    Express shipping: 2-3 business days.<br><br>
+                    Returns accepted within 14 days of delivery.
+                    Items must be unworn with original tags attached.
+                </p>
+            </div>
+
+            <div class="about-block">
+                <h2 class="about-heading">CONTACT</h2>
+                <p class="about-text">
+                    For inquiries, collaborations, or support:<br><br>
+                    <a href="mailto:info@silversaints.com" class="about-link">INFO@SILVERSAINTS.COM</a>
+                </p>
+                <div class="about-socials">
+                    <a href="#" class="social-link">INSTAGRAM</a>
+                    <a href="#" class="social-link">TWITTER</a>
+                    <a href="#" class="social-link">TIKTOK</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">JOIN THE CONGREGATION</h2>
+            <a href="shop.html" class="cta-btn">SHOP NOW</a>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button class="cart-close" id="cartClose">+</button>
+        </div>
+        <div class="cart-shipping-banner" id="shippingBanner">
+            <span class="shipping-text" id="shippingText">FREE SHIPPING ON ORDERS OVER $200</span>
+            <div class="shipping-progress">
+                <div class="shipping-progress-bar" id="shippingProgress"></div>
+            </div>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">YOUR CART IS EMPTY</p>
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span>© 2025 SILVER SAINTS</span>
+            </div>
+            <div class="footer-center">
+                <div class="footer-socials">
+                    <a href="#" target="_blank">INSTAGRAM</a>
+                    <a href="#" target="_blank">TWITTER</a>
+                    <a href="#" target="_blank">TIKTOK</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

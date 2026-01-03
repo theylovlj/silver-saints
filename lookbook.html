@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LOOKBOOK | SILVER SAINTS</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Anonymous+Pro:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-content">
+            <span class="loader-logo">+</span>
+            <div class="loader-text">SILVER SAINTS</div>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <a href="shop.html">SILVER SAINTS</a>
+        </div>
+        <div class="nav-links">
+            <a href="shop.html">SHOP</a>
+            <a href="lookbook.html" class="active">LOOKBOOK</a>
+            <a href="about.html">INFO</a>
+        </div>
+        <div class="nav-right">
+            <a href="#" class="cart-btn hidden" id="cartBtn">CART (<span id="cartCount">0</span>)</a>
+        </div>
+    </nav>
+
+    <!-- Marquee Banner -->
+    <div class="marquee">
+        <div class="marquee-content">
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+            <span>SAINTS & SINNERS</span>
+            <span class="marquee-divider">+</span>
+            <span>COLLECTION 001 - LIMITED DROP</span>
+            <span class="marquee-divider">+</span>
+            <span>FREE SHIPPING OVER $200</span>
+            <span class="marquee-divider">+</span>
+        </div>
+    </div>
+
+    <!-- Lookbook Hero -->
+    <section class="page-hero">
+        <div class="page-hero-content">
+            <h1 class="page-hero-title">LOOKBOOK</h1>
+            <p class="page-hero-subtitle">COLLECTION 001 - SAINTS & SINNERS</p>
+        </div>
+    </section>
+
+    <!-- Lookbook Gallery -->
+    <section class="lookbook" id="lookbook">
+        <div class="lookbook-grid">
+            <div class="lookbook-item large">
+                <img src="https://images.unsplash.com/photo-1611312449408-fcece27cdbb7?w=800&h=1000&fit=crop&q=80" alt="Lookbook 1" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=400&h=600&fit=crop&q=80" alt="Lookbook 2" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1509631179647-0177331693ae?w=400&h=600&fit=crop&q=80" alt="Lookbook 3" class="lookbook-img">
+            </div>
+            <div class="lookbook-item wide">
+                <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&h=500&fit=crop&q=80" alt="Lookbook 4" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?w=400&h=600&fit=crop&q=80" alt="Lookbook 5" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?w=400&h=600&fit=crop&q=80" alt="Lookbook 6" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1539109136881-3be0616acf4b?w=400&h=600&fit=crop&q=80" alt="Lookbook 7" class="lookbook-img">
+            </div>
+            <div class="lookbook-item wide">
+                <img src="https://images.unsplash.com/photo-1581044777550-4cfa60707c03?w=800&h=500&fit=crop&q=80" alt="Lookbook 8" class="lookbook-img">
+            </div>
+            <div class="lookbook-item">
+                <img src="https://images.unsplash.com/photo-1475180429745-4e6ee67fa1e2?w=400&h=600&fit=crop&q=80" alt="Lookbook 9" class="lookbook-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Shop CTA -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">SHOP THE COLLECTION</h2>
+            <a href="shop.html" class="cta-btn">VIEW ALL PRODUCTS</a>
+        </div>
+    </section>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>YOUR CART</h3>
+            <button class="cart-close" id="cartClose">+</button>
+        </div>
+        <div class="cart-shipping-banner" id="shippingBanner">
+            <span class="shipping-text" id="shippingText">FREE SHIPPING ON ORDERS OVER $200</span>
+            <div class="shipping-progress">
+                <div class="shipping-progress-bar" id="shippingProgress"></div>
+            </div>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="cart-empty">YOUR CART IS EMPTY</p>
+        </div>
+        <div class="cart-footer" id="cartFooter">
+            <div class="cart-total">
+                <span>TOTAL</span>
+                <span id="cartTotal">$0</span>
+            </div>
+            <button class="checkout-btn">CHECKOUT</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-left">
+                <span>© 2025 SILVER SAINTS</span>
+            </div>
+            <div class="footer-center">
+                <div class="footer-socials">
+                    <a href="#" target="_blank">INSTAGRAM</a>
+                    <a href="#" target="_blank">TWITTER</a>
+                    <a href="#" target="_blank">TIKTOK</a>
+                </div>
+            </div>
+            <div class="footer-right">
+                <a href="#">TERMS</a>
+                <a href="#">PRIVACY</a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+</body>
+</html>

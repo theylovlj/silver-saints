@@ -1027,6 +1027,144 @@ a {
 
 
 /* ========================================
+   PAGE HERO (Lookbook, About pages)
+   ======================================== */
+.page-hero {
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 100px;
+    border-bottom: 1px solid var(--gray-border);
+    background: var(--gray-light);
+}
+
+.page-hero-content {
+    text-align: center;
+}
+
+.page-hero-title {
+    font-family: var(--font);
+    font-size: 48px;
+    font-weight: 700;
+    letter-spacing: 0.3em;
+    margin-bottom: 15px;
+}
+
+.page-hero-subtitle {
+    font-family: var(--font);
+    font-size: 12px;
+    color: var(--gray);
+    letter-spacing: 0.2em;
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+.cta-section {
+    padding: 80px 30px;
+    text-align: center;
+    border-top: 1px solid var(--gray-border);
+    background: var(--gray-light);
+}
+
+.cta-title {
+    font-family: var(--font);
+    font-size: 18px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    margin-bottom: 30px;
+}
+
+.cta-btn {
+    display: inline-block;
+    padding: 15px 40px;
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    transition: opacity 0.2s;
+}
+
+.cta-btn:hover {
+    opacity: 0.8;
+}
+
+/* ========================================
+   ABOUT PAGE
+   ======================================== */
+.about-section {
+    padding: 80px 30px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 60px;
+}
+
+.about-block {
+    padding-bottom: 40px;
+    border-bottom: 1px solid var(--gray-border);
+}
+
+.about-heading {
+    font-family: var(--font);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    margin-bottom: 20px;
+}
+
+.about-text {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--gray);
+    margin-bottom: 15px;
+}
+
+.about-link {
+    color: var(--black);
+    border-bottom: 1px solid var(--black);
+    transition: opacity 0.2s;
+}
+
+.about-link:hover {
+    opacity: 0.5;
+}
+
+.about-socials {
+    display: flex;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+.social-link {
+    font-family: var(--font);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    transition: opacity 0.2s;
+}
+
+.social-link:hover {
+    opacity: 0.5;
+}
+
+@media (max-width: 768px) {
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .page-hero-title {
+        font-size: 32px;
+    }
+}
+
+/* ========================================
    FOOTER
    ======================================== */
 .footer {
