@@ -4,6 +4,9 @@
 // ========================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize loader
+    Loader.init();
+
     // Initialize based on page
     if (document.getElementById('passwordInput')) {
         PasswordGate.init();
@@ -12,7 +15,53 @@ document.addEventListener('DOMContentLoaded', () => {
         EmailPopup.init();
     }
     SmoothScroll.init();
+    ViewingCounter.init();
 });
+
+// ========================================
+// LOADER
+// ========================================
+const Loader = {
+    init() {
+        const loader = document.getElementById('loader');
+        if (!loader) return;
+
+        // Hide loader after page loads
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                loader.classList.add('hidden');
+            }, 1000);
+        });
+
+        // Fallback: hide loader after 3 seconds max
+        setTimeout(() => {
+            loader.classList.add('hidden');
+        }, 3000);
+    }
+};
+
+// ========================================
+// VIEWING COUNTER (Fake live viewers)
+// ========================================
+const ViewingCounter = {
+    init() {
+        this.counters = document.querySelectorAll('.view-num');
+        if (this.counters.length === 0) return;
+
+        // Update counts periodically
+        setInterval(() => this.updateCounts(), 5000);
+    },
+
+    updateCounts() {
+        this.counters.forEach(counter => {
+            const current = parseInt(counter.textContent);
+            // Random change between -2 and +3
+            const change = Math.floor(Math.random() * 6) - 2;
+            const newVal = Math.max(1, Math.min(25, current + change));
+            counter.textContent = newVal;
+        });
+    }
+};
 
 // ========================================
 // PASSWORD GATE (index.html)
@@ -89,7 +138,7 @@ const EmailPopup = {
 
         // Check if already subscribed
         if (localStorage.getItem('silverSaintsSubscribed')) {
-            return; // Don't show popup
+            return;
         }
 
         // Show popup after 5 seconds
